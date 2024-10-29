@@ -136,11 +136,9 @@ $\mathbf{Z} = \mathbf{X} \mathbf{W} + \mathbf{b}$
 
 以GELU为例，其数学表达式为：
 
-$
 
-\text{GELU}(x) = x \cdot \Phi(x)
 
-$
+$\text{GELU}(x) = x \cdot \Phi(x)$
 
 其中，$\Phi(x)$是标准正态分布的累积分布函数。
 
@@ -152,33 +150,24 @@ $
 
 1. **第一层线性变换**：将输入向量映射到更高维度的隐含空间，实现信息的升维。
 
-   $$
-   \mathbf{H} = \mathbf{X} \mathbf{W}_1 + \mathbf{b}_1
-   $$
+   
+   $\mathbf{H} = \mathbf{X} \mathbf{W}_1 + \mathbf{b}_1$
 
 2. **激活函数**：对升维后的向量应用非线性激活函数，引入非线性特征。
 
-   $$
+   
 
-   \mathbf{H}' = \text{GELU}(\mathbf{H})
-
-   $$
+   $\mathbf{H}' = \text{GELU}(\mathbf{H})$
 
 3. **第二层线性变换**：将隐含空间的向量映射回原始维度，实现信息的降维。
 
-   $$
+   
 
-   \mathbf{Y} = \mathbf{H}' \mathbf{W}_2 + \mathbf{b}_2
-
-   $$
+   $\mathbf{Y} = \mathbf{H}' \mathbf{W}_2 + \mathbf{b}_2$
 
 4. **残差连接**：将MLP的输出与输入进行相加，形成残差连接，便于梯度传播和防止梯度消失。
 
-   $$
-
-   \mathbf{Z} = \mathbf{X} + \mathbf{Y}
-
-   $$
+   $\mathbf{Z} = \mathbf{X} + \mathbf{Y}$
 
 ### **反向传播的工作原理及其公式推导**
 
@@ -194,21 +183,13 @@ $
 
    以权重$\mathbf{W}$为例，梯度为：
 
-   $$
-
-   \frac{\partial L}{\partial \mathbf{W}} = \frac{\partial L}{\partial \mathbf{Y}} \cdot \frac{\partial \mathbf{Y}}{\partial \mathbf{W}}
-
-   $$
+   $\frac{\partial L}{\partial \mathbf{W}} = \frac{\partial L}{\partial \mathbf{Y}} \cdot \frac{\partial \mathbf{Y}}{\partial \mathbf{W}}$
 
    其中，$L$为损失函数，$\mathbf{Y}$为当前层的输出。
 
 4. **参数更新**：使用梯度下降法或其变体（如Adam优化器），更新模型参数。
 
-   $$
-
-   \mathbf{W}_{\text{new}} = \mathbf{W}_{\text{old}} - \eta \frac{\partial L}{\partial \mathbf{W}}
-
-   $$
+   $\mathbf{W}_{\text{new}} = \mathbf{W}_{\text{old}} - \eta \frac{\partial L}{\partial \mathbf{W}}$
 
    其中，$\eta$为学习率。
 
@@ -238,11 +219,7 @@ $
 
 这些向量通过对输入向量$\mathbf{X}$进行线性变换得到：
 
-$$
-
-\mathbf{Q} = \mathbf{X} \mathbf{W}^Q,\quad \mathbf{K} = \mathbf{X} \mathbf{W}^K,\quad \mathbf{V} = \mathbf{X} \mathbf{W}^V
-
-$$
+$\mathbf{Q} = \mathbf{X} \mathbf{W}^Q,\quad \mathbf{K} = \mathbf{X} \mathbf{W}^K,\quad \mathbf{V} = \mathbf{X} \mathbf{W}^V$
 
 其中，$\mathbf{W}^Q、\mathbf{W}^K、\mathbf{W}^V$是可学习的权重矩阵。
 
@@ -252,27 +229,15 @@ $$
 
 1. **计算注意力得分**：对每个查询向量$\mathbf{q}_i$和所有键向量$\mathbf{k}_j$计算点积，得到注意力得分。
 
-   $$
-
-   \text{score}_{ij} = \mathbf{q}_i \cdot \mathbf{k}_j^\top
-
-   $$
+   $\text{score}_{ij} = \mathbf{q}_i \cdot \mathbf{k}_j^\top$
 
 2. **缩放与归一化**：为了避免点积值过大，防止梯度消失，使用缩放因子$\frac{1}{\sqrt{d_k}}$ , $d_k$为键向量的维度）。然后，使用softmax函数对得分进行归一化，得到注意力权重。
 
-   $$
-
-   \alpha_{ij} = \text{softmax}\left(\frac{\text{score}_{ij}}{\sqrt{d_k}}\right)
-
-   $$
+   $\alpha_{ij} = \text{softmax}\left(\frac{\text{score}_{ij}}{\sqrt{d_k}}\right)$
 
 3. **生成输出**：将注意力权重与对应的值向量\(\mathbf{v}_j\)相乘并求和，得到输出向量。
 
-   $$
-
-   \mathbf{z}_i = \sum_j \alpha_{ij} \mathbf{v}_j
-
-   $$
+   $\mathbf{z}_i = \sum_j \alpha_{ij} \mathbf{v}_j$
 
 **直观解释**：
 
@@ -300,27 +265,15 @@ $$
 
 在多头注意力中，存在\(h\)个独立的注意力头，每个头都有自己的一套权重矩阵：
 
-$$
-
-\mathbf{Q}_i = \mathbf{X} \mathbf{W}_i^Q,\quad \mathbf{K}_i = \mathbf{X} \mathbf{W}_i^K,\quad \mathbf{V}_i = \mathbf{X} \mathbf{W}_i^V,\quad i = 1,2,\dots,h
-
-$$
+$\mathbf{Q}_i = \mathbf{X} \mathbf{W}_i^Q,\quad \mathbf{K}_i = \mathbf{X} \mathbf{W}_i^K,\quad \mathbf{V}_i = \mathbf{X} \mathbf{W}_i^V,\quad i = 1,2,\dots,h$
 
 每个头独立计算注意力，生成输出：
 
-$$
-
-\mathbf{Z}_i = \text{Attention}(\mathbf{Q}_i, \mathbf{K}_i, \mathbf{V}_i)
-
-$$
+$\mathbf{Z}_i = \text{Attention}(\mathbf{Q}_i, \mathbf{K}_i, \mathbf{V}_i)$
 
 这些输出会被拼接在一起，并通过一个线性变换，生成最终的输出：
 
-$$
-
-\mathbf{Z} = [\mathbf{Z}_1, \mathbf{Z}_2, \dots, \mathbf{Z}_h] \mathbf{W}^O
-
-$$
+$\mathbf{Z} = [\mathbf{Z}_1, \mathbf{Z}_2, \dots, \mathbf{Z}_h] \mathbf{W}^O$
 
 其中，$\mathbf{W}^O$是用于降维的权重矩阵。
 
@@ -330,19 +283,11 @@ $$
 
 1. **头的计算**：
 
-   $$
-
-   \text{head}_i = \text{Attention}(\mathbf{X} \mathbf{W}_i^Q, \mathbf{X} \mathbf{W}_i^K, \mathbf{X} \mathbf{W}_i^V)
-
-   $$
+   $\text{head}_i = \text{Attention}(\mathbf{X} \mathbf{W}_i^Q, \mathbf{X} \mathbf{W}_i^K, \mathbf{X} \mathbf{W}_i^V)$
 
 2. **多头拼接**：
 
-   $$
-
-   \mathbf{Z} = \text{Concat}(\text{head}_1, \dots, \text{head}_h) \mathbf{W}^O
-
-   $$
+   $\mathbf{Z} = \text{Concat}(\text{head}_1, \dots, \text{head}_h) \mathbf{W}^O$
 
 #### **示例说明**
 
@@ -595,9 +540,7 @@ Logit Lens的核心思想是：
 
 假设我们有一个输入序列，GPT-2模型在处理该序列的过程中，在第\(\ell\)层生成了激活值\(\mathbf{h}^\ell\)。为了查看这一层对输出的预测，我们进行以下计算：
 
-$$
-\text{logits}^\ell = \mathbf{h}^\ell \cdot \mathbf{W}_\text{U}
-$$
+$\text{logits}^\ell = \mathbf{h}^\ell \cdot \mathbf{W}_\text{U}$
 
 其中：
 
@@ -740,11 +683,7 @@ $$
 
    数学上，可以表示为：
 
-   $$
-
-   \mathbf{v}_{\text{new}} = \mathbf{v}_{\text{old}} - \lambda_1 \cdot \mathbf{w}_A + \lambda_2 \cdot \mathbf{w}_{\text{correct}}
-
-   $$
+   $\mathbf{v}_{\text{new}} = \mathbf{v}_{\text{old}} - \lambda_1 \cdot \mathbf{w}_A + \lambda_2 \cdot \mathbf{w}_{\text{correct}}$
 
    其中：
 
