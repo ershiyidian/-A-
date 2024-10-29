@@ -114,10 +114,9 @@ GPT-2是一种基于**Transformer架构**的大型语言模型，由OpenAI在201
 
 线性变换是指对输入向量进行矩阵乘法，以实现数据的线性映射。数学上，它可以表示为：
 
-$
 
-\mathbf{Z} = \mathbf{X} \mathbf{W} + \mathbf{b}
-$
+
+$\mathbf{Z} = \mathbf{X} \mathbf{W} + \mathbf{b}$
 
 
 其中：
