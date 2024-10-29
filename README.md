@@ -1,7 +1,7 @@
 # 啥也不会就选A？深入解析大语言模型中的“锚定偏差”
 
 
-科普：啥也不会就选A？深入解析大语言模型中的“锚定偏差”。某通选课期中作业。。 参考文献：Anchored Answers: Unravelling Positional Bias in GPT-2’s Multiple-Choice Questions
+参考文献：Anchored Answers: Unravelling Positional Bias in GPT-2’s Multiple-Choice Questions
 ## 引言：模型的“锚定偏差”问题
 
 ### 1.1 背景
@@ -114,10 +114,10 @@ GPT-2是一种基于**Transformer架构**的大型语言模型，由OpenAI在201
 
 线性变换是指对输入向量进行矩阵乘法，以实现数据的线性映射。数学上，它可以表示为：
 
-$$
+$
 
 \mathbf{Z} = \mathbf{X} \mathbf{W} + \mathbf{b}
-$$
+$
 
 
 其中：
@@ -137,11 +137,11 @@ $$
 
 以GELU为例，其数学表达式为：
 
-$$
+$
 
 \text{GELU}(x) = x \cdot \Phi(x)
 
-$$
+$
 
 其中，$\Phi(x)$是标准正态分布的累积分布函数。
 
